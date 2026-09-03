@@ -1,0 +1,188 @@
+ <!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>crvgames simulator dosya indirme</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --primary: #3b82f6;
+            --primary-hover: #2563eb;
+            --title-blue: #38bdf8; /* Mavi başlık */
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            color: var(--title-blue); /* Mavi renkli ana başlık */
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            text-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+        }
+
+        p.subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 650px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .download-card {
+            background-color: var(--card-bg);
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .download-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--title-blue);
+            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.15);
+        }
+
+        .info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .info h3 {
+            font-size: 1.1rem;
+            color: #fff;
+        }
+
+        .info span {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .badge {
+            background-color: #334155;
+            color: var(--title-blue);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 0.3rem;
+        }
+
+        .download-btn {
+            background-color: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 0.7rem 1.4rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background-color 0.2s;
+        }
+
+        .download-btn:hover {
+            background-color: var(--primary-hover);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>crvgames simulator dosya indirme</h1>
+        <p class="subtitle">Simülatör için gönderilen tüm 3D araç modellerini sırasıyla indirin</p>
+    </header>
+
+    <div class="container" id="fileContainer">
+        <!-- Dosyalar JavaScript ile buraya dinamik olarak eklenecek -->
+    </div>
+
+    <script>
+        // Düzeltilmiş ve virgülleri eklenmiş dosya listesi
+        const filesList = [
+            { id: 1, name: "Ambulans", fileName: "1.glb", desc: "Siren ve özel ambulans detaylı 3D model" },
+            { id: 2, name: "İtfaiye", fileName: "2.glb", desc: "Detaylı itfaiye simülatör modeli" },
+            { id: 3, name: "Kamyon Modeli", fileName: "3.glb", desc: "Ağır vasıta 3D araç modeli" },
+            { id: 4, name: "kamyon1", fileName: "4.glb", desc: "kamyon 1 modeli" },
+            { id: 5, name: "kamyon2", fileName: "5.glb", desc: "kamyon2" },
+            { id: 6, name: "traktör", fileName: "6.glb", desc: "traktör" },
+            { id: 7, name: "motrosiklet", fileName: "7.glb", desc: "motorsiklet" },
+            { id: 8, name: "downtown otobüsü", fileName: "8.glb", desc: "downtown otobüsü" },
+            { id: 9, name: "pickup", fileName: "9.glb", desc: "pickup" },
+            { id: 10, name: "polis1", fileName: "10.glb", desc: "polis1" },
+            { id: 11, name: "polis2", fileName: "10.glb", desc: "polis2" },
+            { id: 12, name: "otobüs", fileName: "12.glb", desc: "otobüs" },
+            { id: 13, name: "sedan1", fileName: "13.glb", desc: "sedan1" },
+            { id: 14, name: "sedan2", fileName: "14.glb", desc: "sedan2" },
+            { id: 15, name: "tır", fileName: "15.glb", desc: "tır" },
+            { id: 16, name: "SUV", fileName: "16.glb", desc: "SUV" },
+            { id: 17, name: "taksi", fileName: "17.glb", desc: "taksi" }
+        ];
+
+        const container = document.getElementById('fileContainer');
+
+        filesList.forEach((file) => {
+            const card = document.createElement('div');
+            card.className = 'download-card';
+            card.innerHTML = `
+                <div class="info">
+                    <h3>${file.id}. ${file.name}</h3>
+                    <span>${file.desc}</span>
+                    <div><span class="badge">.GLB (3D)</span></div>
+                </div>
+                <button class="download-btn" onclick="downloadModel('${file.fileName}')">
+                    💾 İndir
+                </button>
+            `;
+            container.appendChild(card);
+        });
+
+        function downloadModel(fileName) {
+            const link = document.createElement('a');
+            link.href = fileName;
+            link.download = fileName;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>
